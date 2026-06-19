@@ -1,0 +1,18 @@
+<!--
+title: My Third Post
+date: 2026-06-20
+category: Updates
+description: Testing if GitHub automatically adds this post to the homepage.
+-->
+
+<h1>My Third Post</h1>
+
+<p class="meta">June 20, 2026 · Updates</p>
+
+<p>
+  This post was added directly from GitHub.
+</p>
+
+<p>
+  If this shows up on the homepage, everything is working.
+</p>
