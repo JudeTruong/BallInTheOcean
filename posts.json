@@ -8,14 +8,6 @@
     "file": "posts/my-new-post.txt"
   },
   {
-    "title": "My First Blog Post",
-    "date": "2026-06-18",
-    "category": "Thoughts",
-    "description": "This is the first post on my new blog.",
-    "slug": "firstPost",
-    "file": "posts/firstPost.txt"
-  },
-  {
     "title": "My New Post2",
     "date": "No date",
     "category": "Uncategorized",
