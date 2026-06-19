@@ -40,9 +40,58 @@
       document.title = post.title;
 
       const response = await fetch(post.file);
-      const html = await response.text();
+      const text = await response.text();
 
-      postContent.innerHTML = html;
+      postContent.innerHTML = renderTextPost(text, post);
+    }
+
+    function renderTextPost(text, post) {
+      const body = text.replace(/^---\s*[\s\S]*?\s*---/, "").trim();
+
+      const blocks = body.split(/\n\s*\n/);
+
+      const renderedBlocks = blocks.map(block => {
+        const trimmed = block.trim();
+
+        if (trimmed.startsWith("## ")) {
+          return `<h2>${escapeHtml(trimmed.replace("## ", ""))}</h2>`;
+        }
+
+        if (trimmed.startsWith("# ")) {
+          return `<h1>${escapeHtml(trimmed.replace("# ", ""))}</h1>`;
+        }
+
+        return `<p>${escapeHtml(trimmed).replace(/\n/g, "<br>")}</p>`;
+      }).join("");
+
+      return `
+        <h1>${escapeHtml(post.title)}</h1>
+        <p class="meta">${formatDate(post.date)} · ${escapeHtml(post.category)}</p>
+        ${renderedBlocks}
+      `;
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+
+      if (Number.isNaN(date.getTime())) {
+        return dateString;
+      }
+
+      return date.toLocaleDateString("en-CA", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
     }
 
     loadPost();

@@ -3,17 +3,17 @@ const path = require("path");
 
 const postsDir = path.join(__dirname, "posts");
 
-console.log("Looking for posts in:", postsDir);
+console.log("Looking for text posts in:", postsDir);
 
-function getMeta(html) {
-  const commentBlock = html.match(/<!--([\s\S]*?)-->/);
+function getMeta(text) {
+  const frontMatterMatch = text.match(/^---\s*([\s\S]*?)\s*---/);
   const meta = {};
 
-  if (!commentBlock) {
+  if (!frontMatterMatch) {
     return meta;
   }
 
-  const lines = commentBlock[1].split("\n");
+  const lines = frontMatterMatch[1].split("\n");
 
   lines.forEach(line => {
     const [key, ...valueParts] = line.split(":");
@@ -29,7 +29,7 @@ function getMeta(html) {
 }
 
 function fileToSlug(fileName) {
-  return fileName.replace(".html", "");
+  return fileName.replace(".txt", "");
 }
 
 function slugToTitle(slug) {
@@ -45,14 +45,14 @@ if (!fs.existsSync(postsDir)) {
 
 const files = fs
   .readdirSync(postsDir)
-  .filter(file => file.endsWith(".html"));
+  .filter(file => file.endsWith(".txt"));
 
-console.log("Found post files:", files);
+console.log("Found text post files:", files);
 
 const posts = files.map(file => {
   const filePath = path.join(postsDir, file);
-  const html = fs.readFileSync(filePath, "utf8");
-  const meta = getMeta(html);
+  const text = fs.readFileSync(filePath, "utf8");
+  const meta = getMeta(text);
   const slug = fileToSlug(file);
 
   return {
@@ -69,4 +69,4 @@ posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 fs.writeFileSync("posts.json", JSON.stringify(posts, null, 2));
 
-console.log(`Generated posts.json with ${posts.length} post(s).`);
+console.log(`Generated posts.json with ${posts.length} text post(s).`);
