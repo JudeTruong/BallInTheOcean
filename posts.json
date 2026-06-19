@@ -1,5 +1,13 @@
 [
   {
+    "title": "My New Post",
+    "date": "2026-06-21",
+    "category": "Life",
+    "description": "A short preview of this post.",
+    "slug": "my-new-post",
+    "file": "posts/my-new-post.txt"
+  },
+  {
     "title": "My First Blog Post",
     "date": "2026-06-18",
     "category": "Thoughts",
