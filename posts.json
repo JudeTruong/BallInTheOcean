@@ -1,0 +1,18 @@
+[
+  {
+    "title": "My Second Post",
+    "date": "2026-06-19",
+    "category": "Life",
+    "description": "This is another test post to make sure the automatic blog system works.",
+    "slug": "second-post",
+    "file": "posts/second-post.html"
+  },
+  {
+    "title": "My First Blog Post",
+    "date": "2026-06-18",
+    "category": "Thoughts",
+    "description": "This is the first post on my new blog.",
+    "slug": "first-post",
+    "file": "posts/first-post.html"
+  }
+]

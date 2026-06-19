@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="post-container">
+    <a href="index.html" class="back-link">← Back to all posts</a>
+
+    <article id="post-content" class="post-full">
+      <p>Loading post...</p>
+    </article>
+  </main>
+
+  <script>
+    async function loadPost() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+
+      const postContent = document.getElementById("post-content");
+
+      if (!slug) {
+        postContent.innerHTML = "<p>Post not found.</p>";
+        return;
+      }
+
+      const postsResponse = await fetch("posts.json");
+      const posts = await postsResponse.json();
+
+      const post = posts.find(item => item.slug === slug);
+
+      if (!post) {
+        postContent.innerHTML = "<p>Post not found.</p>";
+        return;
+      }
+
+      document.title = post.title;
+
+      const response = await fetch(post.file);
+      const html = await response.text();
+
+      postContent.innerHTML = html;
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>

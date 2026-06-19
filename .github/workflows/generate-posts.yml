@@ -1,0 +1,27 @@
+name: Generate Posts JSON
+
+on:
+  push:
+    paths:
+      - "posts/**"
+      - "generate-posts.js"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate posts.json
+        run: node generate-posts.js
+
+      - name: Commit updated posts.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update posts.json"
+          file_pattern: posts.json
