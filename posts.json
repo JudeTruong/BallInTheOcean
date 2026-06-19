@@ -14,5 +14,13 @@
     "description": "This is the first post on my new blog.",
     "slug": "firstPost",
     "file": "posts/firstPost.txt"
+  },
+  {
+    "title": "My New Post2",
+    "date": "No date",
+    "category": "Uncategorized",
+    "description": "",
+    "slug": "my-new-post2",
+    "file": "posts/my-new-post2.txt"
   }
 ]
