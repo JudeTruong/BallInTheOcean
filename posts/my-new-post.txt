@@ -1,0 +1,14 @@
+---
+title: My New Post
+date: 2026-06-21
+category: Life
+description: A short preview of this post.
+---
+
+This is the actual blog post.
+
+It can just be normal writing.
+
+## A Section Heading
+
+More writing here.
